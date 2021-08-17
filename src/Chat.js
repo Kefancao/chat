@@ -5,6 +5,8 @@ import './chatroom.css';
 export default function Chat() {
 	const [message, setMessage] = useState(''); 
 
+
+
 	const updateMessage = (event) => {
 		setMessage(event.target.value)
 	}
