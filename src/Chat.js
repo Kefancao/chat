@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import Message from './Message'
+import React, {useState} from 'react'; 
+import Message from './Message';
+import './chatroom.css'; 
 
 export default function Chat() {
 	const [message, setMessage] = useState(''); 
