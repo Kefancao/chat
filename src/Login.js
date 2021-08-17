@@ -20,6 +20,7 @@ export default function LogIn(props) {
 	return (
 		<div className="signIn">
 			<form>
+				<label>Join Code: </label>
 				<input type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
 				<button onClick={changeKey}>Join</button>
 			</form>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Chat from './Chat'; 
 import Button from './Button'; 
@@ -25,7 +25,10 @@ function App() {
   const [key, setKey] = useState('none'); 
   const [user, setUser] = useState(false); 
   
-
+  useEffect(() => {
+    if (key === 'none') setUser(false); 
+    else setUser(true);  
+  }, [key])
 
   return (
     <>
