@@ -22,13 +22,15 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig); 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false); 
+  const [user, setUser] = useState(() => firebase.auth().currentUser);
+   
 
 
   return (
     <>
-      <Button />
-      {loggedIn ? <Chat /> : <LogIn />}
+      <div>
+        {user ? <Chat /> : <LogIn setUser = {setUser} />}
+      </div>
     </>
   )
 }
