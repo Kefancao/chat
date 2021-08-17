@@ -1,26 +1,28 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 import firebase from 'firebase/app'; 
 import 'firebase/auth'; 
 import 'firebase/firestore'; 
 
-export default function LogIn() {
-	const GoogleSignIn = async() => {
-		const provider = new firebase.auth.GoogleAuthProvider(); 
+export default function LogIn(props) {
+	const [code, setCode] = useState(''); 
 
-		firebase.auth().useDeviceLanguage(); 
-
-		try {
-			await firebase.auth().signInWithPopup(provider); 
-		} catch (error){
-			console.log(error.message); 
-		}
+	const codeUpdate = (event) => {
+		setCode(event.target.value); 
+		console.log(code); 
 	}
+
+	const changeKey = () => {
+		console.log(code);
+		props.setKey(code); 
+	}
+ 
 	return (
 		<div className="signIn">
-			<button onClick={GoogleSignIn}>
-				Sign in with Google. 
-			</button>
+			<form>
+				<input type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
+				<button onClick={changeKey}>Join</button>
+			</form>
 		</div>
 	)
 }

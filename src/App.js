@@ -22,14 +22,15 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig); 
 
 function App() {
-  const [user, setUser] = useState(() => firebase.auth().currentUser);
-   
+  const [key, setKey] = useState('none'); 
+  const [user, setUser] = useState(false); 
+  
 
 
   return (
     <>
       <div>
-        {user ? <Chat /> : <LogIn setUser = {setUser} />}
+        {user ? <Chat /> : <LogIn setKey = {setKey} />}
       </div>
     </>
   )
