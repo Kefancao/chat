@@ -22,8 +22,11 @@ if (!firebase.apps.length) {
 }
 
 function Message(props){
+	var curr = firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : 'Anonoymous';
+	var isUser = curr === props.username ? 'received': 'sent';
+	if (!firebase.auth().currentUser.displayName) isUser = 'received'; 
 	return(
-		<div className="message">
+		<div className={'message' + isUser}>
 			<p>{props.text}</p>
 		</div>
 	)
@@ -38,7 +41,7 @@ export default function Messages(props) {
 	return (
 		<div className="messageBox">
 			{messages && messages.map(message => (
-				<Message key={message.id} text={message.text} spent={message.timeSent}/>
+				<Message key={message.id} text={message.text} username={message.username} spent={message.timeSent}/>
 			))}
 		</div>
 

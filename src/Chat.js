@@ -39,6 +39,7 @@ export default function Chat(props) {
 		await messagesRef.add({
 			text: message, 
 			timeSent : firebase.firestore.FieldValue.serverTimestamp(),
+			username : props.username,
 		})
 		setMessage('');
 		
