@@ -2,4 +2,49 @@
 .messageBox{
 	height: 100px;
 	width: 300px; 
+	margin: 20px;
 }
+
+.message{
+	border-radius: 2px;
+	border: 1px solid black;
+	background-color: cadetblue;
+	margin: 0px;
+	margin-top: 5px; 
+}
+
+.message p{
+	margin: 0;
+	overflow-wrap: break-word;
+}
+
+/* width */        
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+  
+.scroll {
+	display: block;
+	border: 0px solid red;
+	padding: 5px;
+	margin-top: 5px;
+	width: 100%;
+	height: 300px;
+	overflow-y: scroll;
+}
+

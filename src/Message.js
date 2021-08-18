@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import React from 'react'
 
 import firebase from 'firebase/app'; 
 import 'firebase/auth'; 
@@ -21,15 +21,26 @@ if (!firebase.apps.length) {
 	firebase.app(); // if already initialized, use that one
 }
 
-export default function Message() {
+function Message(props){
+	return(
+		<div className="message">
+			<p>{props.text}</p>
+		</div>
+	)
+}
+
+
+export default function Messages() {
 	const messagesRef = firebase.firestore().collection('Chat1');
 	const query = messagesRef.orderBy('timeSent').limit(25);
 	const [messages] = useCollectionData(query, { idField : 'id' });
+
 	return (
-		<ul>
+		<div className="messageBox">
 			{messages && messages.map(message => (
-				<li key={message.id}>{message.text}</li>
+				<Message key={message.id} text={message.text} spent={message.timeSent}/>
 			))}
-		</ul>
+		</div>
+
 	)
 }
