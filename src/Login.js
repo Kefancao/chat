@@ -50,7 +50,7 @@ export default function LogIn(props) {
 		const provider = new firebase.auth.GoogleAuthProvider();
     	firebase.auth().signInWithPopup(provider);
 
-		if (firebase.auth().currentUser) 
+		if (firebase.auth().currentUser) props.setUsername(firebase.auth().currentUser.displayName); 
 	}
  
 	return (
@@ -62,7 +62,7 @@ export default function LogIn(props) {
 					<input type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
 					<button onClick={changeKey}>Join</button>
 				</form> 
-				: <button className="auth" onClick={()=> setJoinAnonoymous(true)}>Join as Anonoymous</button>
+				: <button className="auth" onClick={()=> setJoinAnonoymous(true)}>Join as {props.username}</button>
 			}
 			{/* Google Auth */}
 			<div className="auth"> 

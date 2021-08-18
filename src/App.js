@@ -33,7 +33,7 @@ function App() {
   
   useEffect(() => {
     if (key === 'none' || key === 'noneX'){
-      if (key === 'noneX') alert("Invalid Room id :(" + key)
+      if (key === 'noneX') alert("Invalid Room id :(")
       setUser(false); 
     }
     else setUser(true);  
@@ -43,7 +43,8 @@ function App() {
     <>
       <div className="outer">
         {user ? null : <h1 id="outerAppName">Quick Chat</h1>}
-        {user ? <Chat chatNum={key} /> : <LogIn setKey = {setKey} />}
+        {user ? <Chat chatNum={key} username ={username}/> 
+              : <LogIn setKey = {setKey} setUsername={setUsername} username={username}/>}
       </div>
     </>
   )
