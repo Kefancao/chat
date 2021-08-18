@@ -22,10 +22,9 @@ if (!firebase.apps.length) {
 }
 
 export default function Message() {
-	const messagesRef = firebase.firestore().collection('Messages');
-	const query = messagesRef.orderBy('createdAt').limit(25);
+	const messagesRef = firebase.firestore().collection('Chat1');
+	const query = messagesRef.orderBy('timeSent').limit(25);
 	const [messages] = useCollectionData(query, { idField : 'id' });
-	console.log(useCollectionData(query)); 
 	return (
 		<ul>
 			{messages && messages.map(message => (
