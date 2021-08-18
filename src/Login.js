@@ -26,6 +26,7 @@ export default function LogIn(props) {
 	const messagesRef = firebase.firestore().collection('Rooms');
 	const query = messagesRef.orderBy('roomID'); 
 	const [messages] = useCollectionData(query, { idField : 'id' });
+	const [joinAnonoymous, setJoinAnonoymous] = useState(false); 
 
 	const codeUpdate = (event) => {
 		setCode(event.target.value); 
@@ -33,9 +34,10 @@ export default function LogIn(props) {
 	}
 
 	const changeKey = () => {
+		var lowered = code.toLowerCase(); 
 		for (var i = 0; i < messages.length; ++i){
-			if (messages[i].roomID === code){
-				props.setKey(code); 
+			if (messages[i].roomID === lowered){
+				props.setKey(lowered); 
 				return; 
 			}
 		}
@@ -43,14 +45,29 @@ export default function LogIn(props) {
 		alert("Invalid Room Id"); 
 		setCode(''); 
 	}
+
+	const auth = () => {
+		const provider = new firebase.auth.GoogleAuthProvider();
+    	firebase.auth().signInWithPopup(provider);
+
+		if (firebase.auth().currentUser) 
+	}
  
 	return (
 		<div className="signIn">
-			<form>
-				<label>Join Code: </label>
-				<input type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
-				<button onClick={changeKey}>Join</button>
-			</form>
+			{/* For if the user does not want to sign in and just join as anonoymous */}
+			{joinAnonoymous ? 
+				<form>
+					<label>Join Code: </label>
+					<input type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
+					<button onClick={changeKey}>Join</button>
+				</form> 
+				: <button className="auth" onClick={()=> setJoinAnonoymous(true)}>Join as Anonoymous</button>
+			}
+			{/* Google Auth */}
+			<div className="auth"> 
+				<button onClick={auth}>Sign In with Google</button>
+			</div>
 		</div>
 	)
 }
