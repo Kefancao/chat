@@ -1,5 +1,4 @@
 import React, {useState, useRef} from 'react'; 
-import Message from './Message';
 import './chatroom.css'; 
 
 import firebase from 'firebase/app'; 

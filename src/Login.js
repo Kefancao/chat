@@ -1,8 +1,4 @@
-import React, {useState, useEffect} from 'react'
-
-import firebase from 'firebase/app'; 
-import 'firebase/auth'; 
-import 'firebase/firestore'; 
+import React, {useState} from 'react'
 
 export default function LogIn(props) {
 	const [code, setCode] = useState(''); 

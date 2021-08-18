@@ -38,6 +38,7 @@ function App() {
   return (
     <>
       <div className="outer">
+        {user ? null : <h1>Quick Chat</h1>}
         {user ? <Chat chatNum={key}/> : <LogIn setKey = {setKey} />}
       </div>
     </>
