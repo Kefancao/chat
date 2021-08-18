@@ -18,20 +18,41 @@
 	overflow-wrap: break-word;
 }
 
-/* width */        
-::-webkit-scrollbar {
-	width: 10px;
+.chatroom{
+	max-width: 400px;
 }
+
+.outer{
+	position: absolute; 
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.sender{
+	width: inherit;
+	text-align: right;
+	background-color: grey;
+	border-radius: 3px;
+}
+
+/* --------------------   This is the divider     -------------- */
+/* Below code up to the divider is for the chat channel */
+
+/* width, Uncomment to see the scroll bar */        
+/* ::-webkit-scrollbar {
+	width: 10px;
+} */
 
 /* Track */
 ::-webkit-scrollbar-track {
 	background: #f1f1f1;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
+/* Handle, uncomment to see the actual scroll dragger */
+/* ::-webkit-scrollbar-thumb {
 	background: #888;
-}
+} */
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
@@ -40,11 +61,19 @@
   
 .scroll {
 	display: block;
-	border: 0px solid red;
-	padding: 5px;
+	border: 1px solid red;
 	margin-top: 5px;
 	width: 100%;
 	height: 300px;
 	overflow-y: scroll;
 }
 
+#messageReader{
+	/* Makes the input textbox longer. 80% of the sender div*/
+	width: 80%;
+	border-radius: 25px;
+	border: 2px solid #000000;
+	padding: 5px;
+}
+
+/* --------------------   This is the divider     -------------- */

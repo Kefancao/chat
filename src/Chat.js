@@ -36,6 +36,7 @@ export default function Chat() {
 		// Send Message into FireBase
 		e.preventDefault(); 
 
+		if (!message) return; 
 		await messagesRef.add({
 			text: message, 
 			timeSent : firebase.firestore.FieldValue.serverTimestamp(),
@@ -46,17 +47,17 @@ export default function Chat() {
 
 	}
 	return (
-		<>
+		<div className="chatroom">
 			<div class='scroll'>
 				<Messages />
 				<span ref={scroll}></span>
 			</div>
 			<div className="sender">
 				<form>
-					<input value={message} type="text" placeholder="Type here..." onChange={event => updateMessage(event)}></input>
+					<input id="messageReader" value={message} type="text" placeholder="Type here..." onChange={event => updateMessage(event)}></input>
 					<button type='submit' onClick={event => sendMessage(event)}>Send</button>
 				</form>
 			</div>
-		</>
+		</div>
 	)
 }

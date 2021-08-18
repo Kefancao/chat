@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="outer">
         {user ? <Chat /> : <LogIn setKey = {setKey} />}
       </div>
     </>
