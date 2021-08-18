@@ -32,9 +32,9 @@ function Message(props){
 
 export default function Messages(props) {
 	const messagesRef = firebase.firestore().collection(props.chatNum);
-	const query = messagesRef.orderBy('timeSent').limit(100);
+	const query = messagesRef.orderBy('timeSent', 'desc').limit(10);
 	const [messages] = useCollectionData(query, { idField : 'id' });
-
+	if (messages) messages.reverse(); 
 	return (
 		<div className="messageBox">
 			{messages && messages.map(message => (

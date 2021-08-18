@@ -5,6 +5,13 @@
 
 }
 
+body{
+	background-color: #4158D0;
+	background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+
+}
+
 .messageBox{
 	height: 100px;
 	width: 300px; 
@@ -40,6 +47,7 @@
 	text-align: right;
 	background-color: grey;
 	border-radius: 3px;
+	margin-top: 5px;
 }
 
 /* --------------------   This is the divider     -------------- */
@@ -67,7 +75,6 @@
   
 .scroll {
 	display: block;
-	border: 1px solid red;
 	margin-top: 5px;
 	width: 100%;
 	height: 300px;

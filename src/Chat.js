@@ -47,7 +47,7 @@ export default function Chat(props) {
 	}
 	return (
 		<div className="chatroom">
-			<div class='scroll'>
+			<div className='scroll'>
 				<Messages chatNum={props.chatNum}/>
 				<span ref={scroll}></span>
 			</div>
