@@ -30,8 +30,8 @@ function Message(props){
 }
 
 
-export default function Messages() {
-	const messagesRef = firebase.firestore().collection('Chat1');
+export default function Messages(props) {
+	const messagesRef = firebase.firestore().collection(props.chatNum);
 	const query = messagesRef.orderBy('timeSent').limit(100);
 	const [messages] = useCollectionData(query, { idField : 'id' });
 

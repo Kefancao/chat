@@ -38,7 +38,7 @@ function App() {
   return (
     <>
       <div className="outer">
-        {user ? <Chat /> : <LogIn setKey = {setKey} />}
+        {user ? <Chat chatNum={key}/> : <LogIn setKey = {setKey} />}
       </div>
     </>
   )

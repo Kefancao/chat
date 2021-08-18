@@ -23,9 +23,9 @@ if (!firebase.apps.length) {
 	firebase.app(); // if already initialized, use that one
 }
 
-export default function Chat() {
+export default function Chat(props) {
 	const [message, setMessage] = useState(''); 
-	const messagesRef = firebase.firestore().collection('Chat1');
+	const messagesRef = firebase.firestore().collection(props.chatNum);
 	const scroll = useRef(); 
 
 	const updateMessage = (event) => {
@@ -49,7 +49,7 @@ export default function Chat() {
 	return (
 		<div className="chatroom">
 			<div class='scroll'>
-				<Messages />
+				<Messages chatNum={props.chatNum}/>
 				<span ref={scroll}></span>
 			</div>
 			<div className="sender">
