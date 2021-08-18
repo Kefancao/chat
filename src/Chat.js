@@ -48,7 +48,7 @@ export default function Chat(props) {
 	return (
 		<div className="chatroom">
 			<div className='scroll'>
-				<Messages chatNum={props.chatNum}/>
+				<Messages chatNum={props.chatNum} />
 				<span ref={scroll}></span>
 			</div>
 			<div className="sender">
