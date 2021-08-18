@@ -29,6 +29,7 @@ if (!firebase.apps.length) {
 function App() {
   const [key, setKey] = useState('none'); 
   const [user, setUser] = useState(false); 
+  const [username, setUsername] = useState('Anonoymous'); 
   
   useEffect(() => {
     if (key === 'none' || key === 'noneX'){
@@ -41,7 +42,7 @@ function App() {
   return (
     <>
       <div className="outer">
-        {user ? null : <h1>Quick Chat</h1>}
+        {user ? null : <h1 id="outerAppName">Quick Chat</h1>}
         {user ? <Chat chatNum={key} /> : <LogIn setKey = {setKey} />}
       </div>
     </>
