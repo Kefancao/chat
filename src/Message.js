@@ -22,12 +22,14 @@ if (!firebase.apps.length) {
 }
 
 function Message(props){
-	var curr = firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : 'Anonoymous';
-	var isUser = curr === props.username ? 'received': 'sent';
-	if (!firebase.auth().currentUser.displayName) isUser = 'received'; 
+	var curr; 
+	if (!firebase.auth().currentUser) curr = 'Anonymous'; 
+	else curr = firebase.auth().currentUser.displayName; 
+	var isUser = curr === props.username ? 'sent': 'received';
 	return(
 		<div className={'message' + isUser}>
-			<p>{props.text}</p>
+			<p className='username'>{props.username}</p>
+			<p className="message">{props.text}</p>
 		</div>
 	)
 }

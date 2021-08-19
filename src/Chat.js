@@ -36,10 +36,11 @@ export default function Chat(props) {
 		e.preventDefault(); 
 
 		if (!message) return; 
+		var user = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : 'Anonymous'; 
 		await messagesRef.add({
 			text: message, 
 			timeSent : firebase.firestore.FieldValue.serverTimestamp(),
-			username : props.username,
+			username : user,
 		})
 		setMessage('');
 		

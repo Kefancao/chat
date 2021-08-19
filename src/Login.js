@@ -21,16 +21,61 @@ if (!firebase.apps.length) {
 	firebase.app(); // if already initialized, use that one
 }
 
+function makeid(length) {
+	var result           = '';
+	var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+	var charactersLength = characters.length;
+	for ( var i = 0; i < length; i++ ) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+	return result;
+}
+
+function CreateRoom(props){
+	const docRef = firebase.firestore().collection('Rooms'); 
+	const query = docRef.orderBy('roomID'); 
+	const [rooms] = useCollectionData(query); 
+
+	const createRoomKey = () => {
+		var roomID = makeid(5); 
+		remake: 
+		for (var i = 0; i < rooms.length; ++i){
+			if (rooms[i] === roomID){
+				roomID = makeid(5); 
+				continue remake; 
+			}
+		}
+		docRef.add({roomID : roomID}); 
+		alert("Your new room Id is " + roomID); 
+		props.setJoin(true); 
+		props.setCode(roomID); 
+	}
+
+	return (!props.join ? <button className='auth' onClick={createRoomKey}>Create Room</button> : null); 
+
+}
+function SignOut(props) {
+	const logOut = async () => {
+		await firebase.auth().signOut(); 
+		props.rerender(old => !old); 
+	}
+	return firebase.auth().currentUser && (
+	  <button className="auth" onClick={logOut}>Sign Out</button>
+	); 
+  }
+
+
 export default function LogIn(props) {
 	const [code, setCode] = useState(''); 
+	const [rerender, setRerender] = useState(false);
 	const messagesRef = firebase.firestore().collection('Rooms');
 	const query = messagesRef.orderBy('roomID'); 
 	const [messages] = useCollectionData(query, { idField : 'id' });
-	const [joinAnonoymous, setJoinAnonoymous] = useState(false); 
+	const [joinAnonymous, setJoinAnonymous] = useState(false); 
 
+	// if (firebase.auth().currentUser) props.setUsername(firebase.auth().currentUser.displayName); 
 	const codeUpdate = (event) => {
 		setCode(event.target.value); 
-		console.log(code); 
 	}
 
 	const changeKey = () => {
@@ -46,28 +91,36 @@ export default function LogIn(props) {
 		setCode(''); 
 	}
 
-	const auth = () => {
+	const auth = async () => {
 		const provider = new firebase.auth.GoogleAuthProvider();
-    	firebase.auth().signInWithPopup(provider);
-
-		if (firebase.auth().currentUser) props.setUsername(firebase.auth().currentUser.displayName); 
+    	await firebase.auth().signInWithPopup(provider);
+		setRerender(old => !old); 
 	}
  
 	return (
 		<div className="signIn">
-			{/* For if the user does not want to sign in and just join as anonoymous */}
-			{joinAnonoymous ? 
+			{/* For if the user does not want to sign in and just join as Anonymous */}
+			{joinAnonymous ? 
 				<form>
 					<label>Join Code: </label>
-					<input type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
+					<input value = {code} type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
 					<button onClick={changeKey}>Join</button>
 				</form> 
-				: <button className="auth" onClick={()=> setJoinAnonoymous(true)}>Join as {props.username}</button>
+				: <button className="auth" onClick={()=> setJoinAnonymous(true)}>Join as {firebase.auth().currentUser ? firebase.auth().currentUser.displayName : 'Anonymous'}</button>
 			}
 			{/* Google Auth */}
-			<div className="auth"> 
-				<button onClick={auth}>Sign In with Google</button>
-			</div>
+			{!firebase.auth().currentUser ?
+				<div className="auth"> 
+					<button onClick={auth}>Sign In with Google</button>
+				</div>
+				: 
+				null
+			} 
+			{firebase.auth().currentUser ? 
+			<>
+			<CreateRoom setJoin ={setJoinAnonymous} join = {joinAnonymous} setCode={setCode}/>
+			<SignOut rerender={setRerender}/> 
+			</>: null}
 		</div>
 	)
 }
