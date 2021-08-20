@@ -92,7 +92,7 @@ export default function LogIn(props) {
 		<div className="signIn">
 			{/* For if the user does not want to sign in and just join as Anonymous */}
 			{joinAnonymous ? 
-				<form>
+				<form className="joinKey">
 					<label>Join Code: </label>
 					<input value = {code} type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
 					<button onClick={changeKey}>Join</button>
