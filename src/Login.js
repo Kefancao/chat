@@ -32,9 +32,7 @@ function makeid(length) {
 }
 
 function CreateRoom(props){
-	const docRef = firebase.firestore().collection('Rooms'); 
-	const query = docRef.orderBy('roomID'); 
-	const [rooms] = useCollectionData(query); 
+	const docRef = firebase.firestore().collection('Rooms');  
 
 	const createRoomKey = () => {
 		var roomID = makeid(5);  
