@@ -67,7 +67,7 @@ function SignOut(props) {
 
 export default function LogIn(props) {
 	const [code, setCode] = useState(''); 
-	const [rerender, setRerender] = useState(false);
+	const [, setRerender] = useState(false);
 	const messagesRef = firebase.firestore().collection('Rooms');
 	const query = messagesRef.orderBy('roomID'); 
 	const [messages] = useCollectionData(query, { idField : 'id' });
