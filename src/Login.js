@@ -37,14 +37,7 @@ function CreateRoom(props){
 	const [rooms] = useCollectionData(query); 
 
 	const createRoomKey = () => {
-		var roomID = makeid(5); 
-		remake: 
-		for (var i = 0; i < rooms.length; ++i){
-			if (rooms[i] === roomID){
-				roomID = makeid(5); 
-				continue remake; 
-			}
-		}
+		var roomID = makeid(5);  
 		docRef.add({roomID : roomID}); 
 		alert("Your new room Id is " + roomID); 
 		props.setJoin(true); 
