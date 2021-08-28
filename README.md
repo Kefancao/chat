@@ -1,3 +1,7 @@
+# Explanation
+## Tools Used 
+This project was built using a combination of React and firebase. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
