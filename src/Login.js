@@ -42,7 +42,7 @@ function CreateRoom(props){
 		props.setCode(roomID); 
 	}
 
-	return (!props.join ? <button className='auth' onClick={createRoomKey}>Create Room</button> : null); 
+	return (!props.join ? <div className='auth button-29' onClick={createRoomKey}>Create Room</div> : null); 
 
 }
 function SignOut(props) {
@@ -51,7 +51,7 @@ function SignOut(props) {
 		props.rerender(old => !old); 
 	}
 	return firebase.auth().currentUser && (
-	  <button className="auth" onClick={logOut}>Sign Out</button>
+	  <div className="auth button-29" onClick={logOut}>Sign Out</div>
 	); 
   }
 
@@ -97,13 +97,11 @@ export default function LogIn(props) {
 					<input value = {code} type="text" name="code" placeholder="Type your code here..." onChange={event => codeUpdate(event)}></input>
 					<button onClick={changeKey}>Join</button>
 				</form> 
-				: <button className="auth" onClick={()=> setJoinAnonymous(true)}>Join as {firebase.auth().currentUser ? firebase.auth().currentUser.displayName : 'Anonymous'}</button>
+				: <div className="auth button-29" onClick={()=> setJoinAnonymous(true)}>Join as {firebase.auth().currentUser ? firebase.auth().currentUser.displayName : 'Anonymous'}</div>
 			}
 			{/* Google Auth */}
 			{!firebase.auth().currentUser ?
-				<div className="auth"> 
-					<button onClick={auth}>Sign In with Google</button>
-				</div>
+				<div className="auth button-29" onClick={auth}>Sign In with Google</div>
 				: 
 				null
 			} 
