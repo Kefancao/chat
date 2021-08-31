@@ -22,23 +22,45 @@ if (!firebase.apps.length) {
 	firebase.app(); // if already initialized, use that one
 }
 
+
+function Sender(props){
+	const [temp, setTemp] = useState(''); 
+
+	const updateMessage = e => setTemp(e.target.value);
+	
+	const retToParent = event =>{
+		event.preventDefault(); 
+		props.setMessage(temp); 
+		setTemp(''); 
+	}
+
+	return (<div className="sender">
+		<form>
+			<input id="messageReader" value={temp} type="text" placeholder="Type here..." onChange={event => updateMessage(event)}></input>
+			<button type='submit' onClick={event => retToParent(event)}>Send</button>
+		</form>
+	</div>);
+}
+
 export default function Chat(props) {
-	const [message, setMessage] = useState(''); 
+	const [, setMessage] = useState(''); 
 	const messagesRef = firebase.firestore().collection(props.chatNum);
 	const scroll = useRef(); 
 
-	const updateMessage = (event) => {
-		setMessage(event.target.value)
+	const updateMessage = val => {
+		sendMessage(val); 
 	}
+ 
 
-	const sendMessage = async (e) => {
+	// console.log("Updated"); 
+	const sendMessage = async (toSend) => {
+		console.log("SendMessage");
 		// Send Message into FireBase
-		e.preventDefault(); 
-
-		if (!message) return; 
+		// setMessage(document.getElementById("messageReader").value);
+		if (!toSend) return; 
 		var user = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : 'Anonymous'; 
 		await messagesRef.add({
-			text: message, 
+			text: toSend, 
 			timeSent : firebase.firestore.FieldValue.serverTimestamp(),
 			username : user,
 		})
@@ -53,12 +75,7 @@ export default function Chat(props) {
 				<Messages chatNum={props.chatNum} />
 				<span ref={scroll}></span>
 			</div>
-			<div className="sender">
-				<form>
-					<input id="messageReader" value={message} type="text" placeholder="Type here..." onChange={event => updateMessage(event)}></input>
-					<button type='submit' onClick={event => sendMessage(event)}>Send</button>
-				</form>
-			</div>
+			<Sender setMessage={updateMessage}/>
 		</div>
 	)
 }
