@@ -46,12 +46,10 @@ export default function Chat(props) {
 	const [, setMessage] = useState(''); 
 	const messagesRef = firebase.firestore().collection(props.chatNum);
 	const scroll = useRef(); 
-
 	const updateMessage = val => {
 		sendMessage(val); 
 	}
  
-
 	// console.log("Updated"); 
 	const sendMessage = async (toSend) => {
 		console.log("SendMessage");
