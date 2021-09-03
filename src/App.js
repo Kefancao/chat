@@ -25,11 +25,10 @@ if (!firebase.apps.length) {
 	firebase.app(); // if already initialized, use that one
 }
 
-
 function App() {
   const [key, setKey] = useState('none'); 
   const [user, setUser] = useState(false); 
-  
+
   useEffect(() => {
     if (key === 'none' || key === 'noneX'){
       if (key === 'noneX') alert("Invalid Room id :(")
