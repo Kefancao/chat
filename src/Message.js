@@ -46,6 +46,5 @@ export default function Messages(props) {
 				<Message key={message.id} text={message.text} username={message.username} spent={message.timeSent}/>
 			))}
 		</div>
-
 	)
 }
