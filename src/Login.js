@@ -69,6 +69,7 @@ export default function LogIn(props) {
 		setCode(event.target.value); 
 	}
 
+	
 	const changeKey = () => {
 		var lowered = code.toLowerCase(); 
 		for (var i = 0; i < messages.length; ++i){
